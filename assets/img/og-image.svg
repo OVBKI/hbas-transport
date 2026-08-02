@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="HBAS TRANSPORT — Votre partenaire de confiance pour le transport national et international">
+  <defs>
+    <linearGradient id="og-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDFBF7"/><stop offset="100%" stop-color="#EAF1F8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+
+  <!-- hazard chevron band -->
+  <g>
+    <clipPath id="og-band"><rect x="0" y="0" width="1200" height="26"/></clipPath>
+    <g clip-path="url(#og-band)">
+      <rect width="1200" height="26" fill="#12171F"/>
+      <g fill="#FF5B12">
+        <g id="og-ch"><path d="M0 -10 L26 -10 L6 36 L-20 36 Z"/></g>
+        <use href="#og-ch" x="52"/><use href="#og-ch" x="104"/><use href="#og-ch" x="156"/><use href="#og-ch" x="208"/>
+        <use href="#og-ch" x="260"/><use href="#og-ch" x="312"/><use href="#og-ch" x="364"/><use href="#og-ch" x="416"/>
+        <use href="#og-ch" x="468"/><use href="#og-ch" x="520"/><use href="#og-ch" x="572"/><use href="#og-ch" x="624"/>
+        <use href="#og-ch" x="676"/><use href="#og-ch" x="728"/><use href="#og-ch" x="780"/><use href="#og-ch" x="832"/>
+        <use href="#og-ch" x="884"/><use href="#og-ch" x="936"/><use href="#og-ch" x="988"/><use href="#og-ch" x="1040"/>
+        <use href="#og-ch" x="1092"/><use href="#og-ch" x="1144"/><use href="#og-ch" x="1196"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- mark -->
+  <rect x="80" y="96" width="84" height="84" rx="20" fill="#12171F"/>
+  <g fill="#FF5B12" transform="translate(80 96) scale(1.3125)">
+    <path d="M14 18 L26 32 L14 46 L22 46 L34 32 L22 18 Z"/>
+    <path d="M30 18 L42 32 L30 46 L38 46 L50 32 L38 18 Z"/>
+  </g>
+
+  <text x="80" y="300" font-family="Archivo, Arial Narrow, sans-serif" font-size="96" font-weight="800" letter-spacing="2" fill="#12171F">HBAS TRANSPORT</text>
+  <text x="82" y="362" font-family="Georgia, serif" font-size="34" fill="#4A545F">Votre partenaire de confiance pour le transport</text>
+  <text x="82" y="406" font-family="Georgia, serif" font-size="34" fill="#4A545F">national et international.</text>
+
+  <g font-family="ui-monospace, Menlo, monospace" font-size="20" letter-spacing="3" fill="#12171F">
+    <rect x="80" y="452" width="216" height="46" rx="23" fill="none" stroke="#D8DEE6" stroke-width="2"/>
+    <text x="104" y="481">BELGIQUE · EU</text>
+    <rect x="312" y="452" width="252" height="46" rx="23" fill="none" stroke="#D8DEE6" stroke-width="2"/>
+    <text x="336" y="481">DEVIS GRATUIT</text>
+    <rect x="580" y="452" width="228" height="46" rx="23" fill="none" stroke="#D8DEE6" stroke-width="2"/>
+    <text x="604" y="481">FTL · LTL · EXPRESS</text>
+  </g>
+
+  <!-- truck -->
+  <g transform="translate(760 210) scale(0.72)">
+    <rect x="120" y="0" width="360" height="150" rx="8" fill="#FFFFFF" stroke="#D7DDE4" stroke-width="4"/>
+    <rect x="120" y="112" width="360" height="16" fill="#FF5B12"/>
+    <path d="M20 46 a12 12 0 0 1 12-12 H112 V150 H20 Z" fill="#FFFFFF" stroke="#D7DDE4" stroke-width="4"/>
+    <path d="M32 52 H112 V96 H32 Z" fill="#A9CBEA"/>
+    <rect x="20" y="128" width="460" height="12" fill="#39424C"/>
+    <g fill="#232C36"><circle cx="70" cy="160" r="26"/><circle cx="330" cy="160" r="26"/><circle cx="404" cy="160" r="26"/></g>
+    <g fill="#9AA4AF"><circle cx="70" cy="160" r="11"/><circle cx="330" cy="160" r="11"/><circle cx="404" cy="160" r="11"/></g>
+  </g>
+
+  <rect x="0" y="604" width="1200" height="26" fill="#12171F"/>
+</svg>

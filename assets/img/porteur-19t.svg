@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="Porteur 2 essieux MMA 19 tonnes de HBAS TRANSPORT, vue de profil">
+  <defs>
+    <linearGradient id="pt-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F4F8FC"/><stop offset="100%" stop-color="#FDFBF7"/>
+    </linearGradient>
+    <linearGradient id="pt-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#EDF0F4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#pt-bg)"/>
+  <g stroke="#E6EBF0" stroke-width="2" opacity=".8">
+    <path d="M0 110 H800"/><path d="M0 190 H800"/>
+  </g>
+
+  <ellipse cx="400" cy="368" rx="300" ry="16" fill="#6C7784" opacity=".18"/>
+
+  <!-- box body -->
+  <path d="M296 106 H690 a10 10 0 0 1 10 10 V300 H296 Z" fill="url(#pt-body)" stroke="#DBE1E8" stroke-width="3"/>
+  <!-- cab -->
+  <path d="M120 158 a14 14 0 0 1 14-14 H286 a10 10 0 0 1 10 10 V300 H120 Z" fill="url(#pt-body)" stroke="#DBE1E8" stroke-width="3"/>
+  <!-- windscreen -->
+  <path d="M136 166 a8 8 0 0 1 8-8 H286 V228 H136 Z" fill="#A9CBEA"/>
+  <path d="M136 200 H286" stroke="#FFFFFF" stroke-width="3" opacity=".55"/>
+  <!-- cab / body gap -->
+  <rect x="286" y="150" width="10" height="150" fill="#D5DCE4"/>
+  <!-- accent stripe -->
+  <rect x="120" y="252" width="580" height="22" fill="#FF5B12"/>
+  <!-- side panel seams -->
+  <g stroke="#DFE5EB" stroke-width="2.5">
+    <path d="M400 106 V300"/><path d="M504 106 V300"/><path d="M608 106 V300"/>
+  </g>
+  <!-- wordmark -->
+  <text x="322" y="176" font-family="Archivo, Arial Narrow, sans-serif" font-size="52" font-weight="800" letter-spacing="5" fill="#12171F" opacity=".85">HBAS</text>
+  <text x="324" y="212" font-family="ui-monospace, Menlo, monospace" font-size="18" letter-spacing="6" fill="#5A6672">TRANSPORT</text>
+  <!-- tail lift -->
+  <rect x="694" y="286" width="16" height="70" rx="4" fill="#39424C"/>
+  <rect x="666" y="348" width="60" height="12" rx="4" fill="#4A545F"/>
+  <!-- chevron hazard on tail -->
+  <g>
+    <clipPath id="pt-clip"><rect x="694" y="286" width="16" height="70" rx="4"/></clipPath>
+    <g clip-path="url(#pt-clip)">
+      <rect x="690" y="286" width="24" height="70" fill="#FFFFFF"/>
+      <g fill="#E4483C"><rect x="686" y="286" width="10" height="70" transform="rotate(0)"/><rect x="704" y="286" width="10" height="70"/></g>
+    </g>
+  </g>
+  <!-- mirror, bumper, lights -->
+  <path d="M124 148 h-20 a6 6 0 0 0-6 6 v26 a6 6 0 0 0 6 6 h20" fill="#2B3540"/>
+  <rect x="112" y="292" width="70" height="18" rx="5" fill="#39424C"/>
+  <rect x="116" y="264" width="26" height="16" rx="4" fill="#FFD48A"/>
+  <!-- side guard -->
+  <path d="M300 314 H660" stroke="#B9C2CC" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- wheels -->
+  <g>
+    <circle cx="210" cy="322" r="52" fill="#232C36"/><circle cx="210" cy="322" r="25" fill="#9AA4AF"/><circle cx="210" cy="322" r="10" fill="#6C7784"/>
+    <circle cx="576" cy="322" r="52" fill="#232C36"/><circle cx="576" cy="322" r="25" fill="#9AA4AF"/><circle cx="576" cy="322" r="10" fill="#6C7784"/>
+  </g>
+  <path d="M158 322 a52 52 0 0 1 104 0" fill="none" stroke="#CBD3DB" stroke-width="4"/>
+  <path d="M524 322 a52 52 0 0 1 104 0" fill="none" stroke="#CBD3DB" stroke-width="4"/>
+
+  <path d="M50 378 H750" stroke="#DDE3EA" stroke-width="4" stroke-linecap="round"/>
+</svg>
