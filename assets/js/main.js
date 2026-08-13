@@ -43,6 +43,47 @@
   }
 
   /* -------------------------------------------------------------
+     1 bis. Vidéo de fond du bandeau
+     Trois cas à couvrir : le visiteur refuse les animations, le
+     navigateur ne sait pas lire le fichier, ou la lecture automatique
+     est bloquée. Dans tous les cas l'affiche (`poster`) prend le relais.
+     ------------------------------------------------------------- */
+  var heroVideo = $('.hero__video');
+
+  if (heroVideo) {
+    if (reduceMotion) {
+      // Le script est chargé en `defer` : on intervient avant la lecture.
+      heroVideo.removeAttribute('autoplay');
+      heroVideo.pause();
+      heroVideo.removeAttribute('loop');
+    } else {
+      heroVideo.addEventListener('error', function () {
+        heroVideo.setAttribute('data-failed', 'true');
+      });
+      // `error` sur <video> ne se déclenche pas pour une source illisible :
+      // c'est l'élément <source> qui échoue.
+      var src = $('source', heroVideo);
+      if (src) src.addEventListener('error', function () {
+        heroVideo.setAttribute('data-failed', 'true');
+      });
+
+      // Certains navigateurs refusent la lecture automatique : on réessaie,
+      // et à défaut on garde l'affiche plutôt qu'une image figée aléatoire.
+      var attempt = heroVideo.play();
+      if (attempt && typeof attempt.catch === 'function') {
+        attempt.catch(function () { heroVideo.removeAttribute('autoplay'); });
+      }
+
+      // Inutile de décoder la vidéo quand l'onglet est en arrière-plan.
+      document.addEventListener('visibilitychange', function () {
+        if (heroVideo.getAttribute('data-failed')) return;
+        if (document.hidden) heroVideo.pause();
+        else { var r = heroVideo.play(); if (r && r.catch) r.catch(function () {}); }
+      });
+    }
+  }
+
+  /* -------------------------------------------------------------
      2. Navigation mobile
      ------------------------------------------------------------- */
   var navToggle = $('.nav-toggle');

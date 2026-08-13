@@ -12,8 +12,8 @@ Il suffit de déposer le dossier sur n'importe quel hébergement web.
 | | |
 |---|---|
 | **Pages** | Accueil (one-page), Mentions légales, Politique de confidentialité |
-| **Poids de la page d'accueil** | ~242 Ko, 9 requêtes |
-| **Core Web Vitals** (mesurés) | LCP ~250 ms · CLS 0,0005 |
+| **Poids de la page d'accueil** | ~1,35 Mo, 10 requêtes (dont 1,1 Mo de vidéo de fond) |
+| **Core Web Vitals** (mesurés) | LCP ~200 ms · CLS 0,0005 |
 | **Responsive** | Testé de 320 px à 1920 px, sans débordement |
 | **Accessibilité** | Contrastes WCAG AA validés (fonds `rgba` composés, dégradés testés arrêt par arrêt), navigation clavier, libellés de formulaire |
 | **Langue** | Français (`fr-BE`) |
@@ -115,7 +115,7 @@ Les illustrations SVG livrées sont de qualité correcte mais restent des
 
 | Fichier | À remplacer par |
 |---|---|
-| `img/hero-poster.svg` | Photo de camion en mouvement (autoroute), ~1920 px |
+| `img/hero-poster.svg` | Image de repli du bandeau, visible tant que la vidéo n'est pas lue |
 | `img/vehicule-leger.svg` | Photo du véhicule 20 m³ |
 | `img/porteur-19t.svg` | Photo du porteur 19 t |
 | `img/semi-40t.svg` | Photo du semi-remorque 40 t |
@@ -126,7 +126,9 @@ Les illustrations SVG livrées sont de qualité correcte mais restent des
 Conservez les noms de fichiers pour n'avoir aucun code à modifier — ou ajustez
 les `src` et les attributs `alt` dans `index.html`.
 
-**Vidéo du bandeau** : voir [`assets/video/README.md`](assets/video/README.md).
+**Vidéo du bandeau** : déjà en place (`assets/video/hero-camion.mp4`).
+Pour la remplacer ou ajuster le cadrage, voir
+[`assets/video/README.md`](assets/video/README.md).
 
 ### 3. Ajouter un véhicule à la flotte
 

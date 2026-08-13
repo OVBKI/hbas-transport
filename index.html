@@ -89,16 +89,19 @@
 <section class="hero" id="accueil">
   <div class="hero__media">
     <!-- VISUEL DU BANDEAU ─────────────────────────────────────────────────
-         Par défaut : illustration. Remplacez-la par une photo réelle de camion
-         (JPG ou WebP, ~1920 px de large, optimisée).
-         POUR UNE VIDÉO : déposez le fichier dans assets/video/hero-camion.mp4,
-         supprimez la balise <img> ci-dessous puis décommentez le bloc <video>. -->
-    <img src="assets/img/hero-poster.svg" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
-    <!--
-    <video autoplay muted loop playsinline poster="assets/img/hero-poster.svg" aria-hidden="true" tabindex="-1">
+         L'image est une couche à part, TOUJOURS présente derrière la vidéo.
+         Elle s'affiche instantanément, reste visible pendant le chargement,
+         et prend le relais si la lecture échoue ou si le visiteur a demandé
+         de réduire les animations (voir main.js).
+         Elle ne peut pas être remplacée par l'attribut `poster` de la vidéo :
+         masquer une vidéo illisible masquerait aussi son affiche.
+         Pour changer de vidéo : remplacez assets/video/hero-camion.mp4. -->
+    <img class="hero__still" src="assets/img/hero-poster.svg" alt=""
+         width="1600" height="900" fetchpriority="high" decoding="async">
+    <video class="hero__video" autoplay muted loop playsinline preload="metadata"
+           aria-hidden="true" tabindex="-1">
       <source src="assets/video/hero-camion.mp4" type="video/mp4">
     </video>
-    -->
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
 

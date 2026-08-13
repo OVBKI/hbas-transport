@@ -390,16 +390,46 @@ a:hover { color: #FFA694; }
   overflow: hidden;
   isolation: isolate;
 }
-.hero__media { position: absolute; inset: 0; z-index: -2; }
-.hero__media video, .hero__media img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center 58%;
+/* L'image et la vidéo se superposent exactement : l'image est la couche de
+   repli, la vidéo la recouvre lorsqu'elle est lisible. */
+.hero__media { position: absolute; inset: 0; z-index: -2; background: var(--deep); }
+.hero__media > * {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  /* `center` est neutre : ajustez le second axe (ex. `center 35%`) si le sujet
+     de la vidéo est mal cadré une fois recadrée en `cover`. */
+  object-position: center;
 }
+.hero__still { z-index: 0; }
+.hero__video { z-index: 1; }
+
+/* Voile de lisibilité.
+   Il est calibré pour que le texte reste lisible QUELLE QUE SOIT la luminosité
+   de la vidéo : la colonne de gauche, où se trouve le texte, est fortement
+   assombrie ; la droite reste dégagée pour qu'on voie l'image. */
 .hero__scrim {
   position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(180deg, rgba(10,11,14,.94) 0%, rgba(10,11,14,.62) 26%, rgba(10,11,14,.35) 48%, rgba(10,11,14,.82) 82%, var(--bg) 100%),
-    linear-gradient(100deg, rgba(10,11,14,.94) 0%, rgba(10,11,14,.55) 46%, rgba(10,11,14,.1) 78%),
-    radial-gradient(60% 50% at 78% 62%, rgba(226,52,52,.16) 0%, rgba(226,52,52,0) 70%);
+    /* fondu vertical : sous l'en-tête, puis vers la page */
+    linear-gradient(180deg,
+      rgba(10,11,14,.92) 0%, rgba(10,11,14,.55) 22%,
+      rgba(10,11,14,.35) 45%, rgba(10,11,14,.80) 80%, var(--bg) 100%),
+    /* fondu horizontal : bloc de texte à gauche */
+    linear-gradient(100deg,
+      rgba(10,11,14,.95) 0%, rgba(10,11,14,.90) 32%,
+      rgba(10,11,14,.62) 55%, rgba(10,11,14,.28) 78%, rgba(10,11,14,.18) 100%),
+    radial-gradient(60% 50% at 78% 62%, rgba(226,52,52,.14) 0%, rgba(226,52,52,0) 70%);
+}
+/* En colonne unique, le texte occupe toute la largeur : le voile doit être
+   uniforme, sinon la fin des lignes passe sur une zone claire de la vidéo. */
+@media (max-width: 860px) {
+  .hero__scrim {
+    background:
+      linear-gradient(180deg,
+        rgba(10,11,14,.94) 0%, rgba(10,11,14,.80) 30%,
+        rgba(10,11,14,.78) 60%, rgba(10,11,14,.90) 85%, var(--bg) 100%),
+      radial-gradient(80% 45% at 70% 55%, rgba(226,52,52,.14) 0%, rgba(226,52,52,0) 70%);
+  }
 }
 
 /* `margin-top:auto` plutôt que `justify-content:flex-end` : le contenu reste
@@ -452,20 +482,31 @@ a:hover { color: #FFA694; }
 
 .hero__cta { display: flex; flex-wrap: wrap; gap: .85rem; }
 
-/* Barre de repères sous le hero */
+/* Barre de repères sous le hero.
+   Posée sur une vidéo, elle a besoin de son propre fond : sans lui, les
+   séparateurs et les libellés se noient dans les zones claires de l'image. */
 .hero__facts {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--line);
   margin-top: clamp(2.6rem, 5vw, 4rem);
+  /* Opacité calibrée sur le pire cas mesuré — une vidéo entièrement blanche :
+     à .55 les libellés ne tenaient que 3,65:1 sur mobile. */
+  background: rgba(5, 6, 8, .78);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--radius-lg);
+  padding: 0 clamp(1rem, 2vw, 1.6rem) clamp(1rem, 2vw, 1.4rem);
 }
 .hero__facts div {
   padding: 1.15rem 1.3rem 0 0;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid rgba(255,255,255,.09);
 }
 .hero__facts div:last-child { border-right: 0; }
 .hero__facts dt {
   font-family: var(--mono); font-size: .62rem; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--txt-3); margin-bottom: .45rem;
+  /* --txt-2 et non --txt-3 : ces libellés sont posés sur la vidéo, dont la
+     luminosité est inconnue — on garde de la marge. */
+  text-transform: uppercase; color: var(--txt-2); margin-bottom: .45rem;
 }
 .hero__facts dd {
   margin: 0; font-family: var(--display); font-weight: 800;
@@ -475,7 +516,7 @@ a:hover { color: #FFA694; }
 @media (max-width: 760px) {
   .hero__facts { grid-template-columns: repeat(2, 1fr); gap: 0 1rem; }
   .hero__facts div:nth-child(2) { border-right: 0; }
-  .hero__facts div:nth-child(-n+2) { padding-bottom: 1.15rem; border-bottom: 1px solid var(--line); }
+  .hero__facts div:nth-child(-n+2) { padding-bottom: 1.15rem; border-bottom: 1px solid rgba(255,255,255,.09); }
 }
 @media (max-width: 760px) { .hero { min-height: auto; padding-top: 116px; } }
 
@@ -1099,6 +1140,10 @@ a.coord:hover .coord__ico { background: var(--red); color: #fff; }
 /* Une fois l'entrée jouée, on libère la couche de composition. */
 [data-reveal].is-in { will-change: auto; }
 
+/* Vidéo de fond : masquée si la lecture est impossible ou refusée.
+   L'image placée dessous redevient alors visible d'elle-même. */
+.hero__video[data-failed="true"] { display: none; }
+
 /* Le bandeau d'accueil est visible dès le chargement : son contenu ne doit pas
    attendre l'IntersectionObserver pour s'afficher. On le fait entrer avec une
    animation CSS qui démarre immédiatement — sinon le titre reste invisible
@@ -1128,6 +1173,7 @@ a.coord:hover .coord__ico { background: var(--red); color: #fff; }
   .ticker__track { animation: none; }
   .hero h1 .l2 { animation: none; }
   .hero__tag .dot { animation: none; }
+  /* la lecture est également arrêtée côté JS, voir main.js */
 }
 
 @media print {
