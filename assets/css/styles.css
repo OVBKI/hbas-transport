@@ -30,7 +30,6 @@
   /* Rouge — accent principal */
   --red:      #E23434;   /* surfaces et graphismes */
   --red-lt:   #FF7A66;   /* variante lisible pour le texte sur fond sombre */
-  --red-dp:   #8E1414;   /* extrémité sombre des dégradés */
   --red-soft: rgba(226, 52, 52, .13);
   --red-glow: rgba(226, 52, 52, .35);
   --ok:       #34D399;
@@ -41,7 +40,6 @@
   /* Dégradé de SURFACE — pour un libellé blanc posé dessus.
      Volontairement plus sombre : du blanc sur #FF9E80 ne dépasserait pas 2:1. */
   --grad-fill: linear-gradient(96deg, #DC2626 0%, #A81616 55%, #C42020 100%);
-  --grad-line: linear-gradient(90deg, transparent, var(--red), transparent);
 
   /* Typographie */
   --display: "Archivo", "Arial Narrow", "Helvetica Neue", sans-serif;
@@ -58,7 +56,6 @@
   --shadow-sm: 0 1px 2px rgba(0,0,0,.5), 0 2px 10px rgba(0,0,0,.35);
   --shadow-md: 0 2px 6px rgba(0,0,0,.55), 0 14px 36px rgba(0,0,0,.45);
   --shadow-lg: 0 6px 14px rgba(0,0,0,.6), 0 30px 70px rgba(0,0,0,.55);
-  --glow:      0 0 0 1px rgba(226,52,52,.35), 0 10px 40px -8px var(--red-glow);
 
   /* Motion */
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -172,7 +169,6 @@ a:hover { color: #FFA694; }
    révélation : sans lui, un bloc encore décalé de 24 px élargit le document.
    Contrairement à `hidden`, `clip` ne crée pas de conteneur de défilement. */
 .section { padding-block: clamp(4.5rem, 9vw, 8.5rem); position: relative; overflow-x: clip; }
-.section--tight { padding-block: clamp(3.5rem, 6vw, 5.5rem); }
 
 .section--paper2 { background: var(--bg-alt); }
 
@@ -190,7 +186,6 @@ a:hover { color: #FFA694; }
   color: var(--txt);
 }
 
-.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
 
 /* Bandeau de chevrons — motif signature (marquage arrière poids lourds) */
 .hazard {
@@ -201,11 +196,6 @@ a:hover { color: #FFA694; }
       var(--deep) 18px 36px);
 }
 .hazard--thin { height: 6px; }
-.hazard--light {
-  background: repeating-linear-gradient(115deg,
-    var(--red) 0 16px,
-    #2A303A 16px 32px);
-}
 
 /* En-tête de section */
 .kicker {
@@ -1066,8 +1056,23 @@ a.coord:hover .coord__ico { background: var(--red); color: #fff; }
 }
 .notice strong { color: var(--txt); }
 
-/* Tableaux : défilement propre plutôt que débordement de la page */
-.prose .table-wrap { overflow-x: auto; }
+/* Tableaux : ils défilent dans leur propre conteneur. Sans cela, sous 390 px,
+   le tableau dépasse et se fait couper par l'`overflow-x: clip` de la section
+   — le contenu devient alors illisible sur téléphone. */
+.prose .table-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border-radius: var(--radius);
+  /* ombres latérales indiquant qu'il reste du contenu à faire défiler */
+  background:
+    linear-gradient(90deg, var(--bg) 30%, rgba(10,11,14,0)) left / 28px 100% no-repeat,
+    linear-gradient(90deg, rgba(10,11,14,0), var(--bg) 70%) right / 28px 100% no-repeat,
+    radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.5), transparent) left / 12px 100% no-repeat,
+    radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.5), transparent) right / 12px 100% no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+.prose .table-wrap table { margin: 0; }
+.prose .table-wrap + h2 { margin-top: 3rem; }
 
 /* ---------------------------------------------------------------
    19. Animations au défilement

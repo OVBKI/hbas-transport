@@ -119,7 +119,9 @@ Les illustrations SVG livrées sont de qualité correcte mais restent des
 | `img/vehicule-leger.svg` | Photo du véhicule 20 m³ |
 | `img/porteur-19t.svg` | Photo du porteur 19 t |
 | `img/semi-40t.svg` | Photo du semi-remorque 40 t |
-| `img/og-image.svg` | Idéalement un **PNG 1200×630** (certains réseaux sociaux ignorent le SVG) |
+> L'image de partage (`img/og-image.png`) est déjà un vrai PNG 1200 × 630, généré
+> depuis le gabarit [`assets/og/template.html`](assets/og/README.md) — rien à faire,
+> sauf si vous modifiez la charte.
 
 Conservez les noms de fichiers pour n'avoir aucun code à modifier — ou ajustez
 les `src` et les attributs `alt` dans `index.html`.
