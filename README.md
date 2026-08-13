@@ -13,17 +13,27 @@ Il suffit de déposer le dossier sur n'importe quel hébergement web.
 |---|---|
 | **Pages** | Accueil (one-page), Mentions légales, Politique de confidentialité |
 | **Poids de la page d'accueil** | ~242 Ko, 9 requêtes |
-| **Core Web Vitals** (mesurés) | LCP 200 ms · CLS 0,0005 |
+| **Core Web Vitals** (mesurés) | LCP ~250 ms · CLS 0,0005 |
 | **Responsive** | Testé de 320 px à 1920 px, sans débordement |
-| **Accessibilité** | Contrastes WCAG AA validés, navigation clavier, libellés de formulaire |
+| **Accessibilité** | Contrastes WCAG AA validés (fonds `rgba` composés, dégradés testés arrêt par arrêt), navigation clavier, libellés de formulaire |
 | **Langue** | Français (`fr-BE`) |
 
 ### Direction artistique
 
-Thème clair et lumineux inspiré de la **signalétique routière** : papier chaud,
-encre profonde, **orange haute visibilité** (gilets et marquages arrière poids lourds),
-motif de chevrons en signature. Typographie industrielle **Archivo** (titres),
+**Thème sombre**, « nuit sur l'autoroute » : asphalte profond, **dégradés rouges**
+de feux arrière sur les titres, motif de chevrons (marquage arrière poids lourds)
+en signature, halos discrets. Typographie industrielle **Archivo** (titres),
 **Instrument Sans** (texte) et **Martian Mono** (données techniques).
+
+Deux dégradés distincts, à ne pas confondre :
+
+| Variable | Usage | Pourquoi |
+|---|---|---|
+| `--grad` | **Texte** (titres, via `background-clip`) | Teintes claires, ≥ 4,5:1 sur les fonds sombres |
+| `--grad-fill` | **Surfaces** (boutons, liserés) | Volontairement plus sombre : du blanc sur la teinte claire de `--grad` ne dépasserait pas 2:1 |
+
+La classe `.grad` porte un repli `color` : si `background-clip: text` n'est pas
+supporté, le titre reste lisible en rouge plein plutôt que de disparaître.
 
 ---
 
@@ -181,6 +191,15 @@ complétez la politique de confidentialité et prévoyez une bannière.
 **Animations respectueuses.** Les révélations au défilement utilisent
 `IntersectionObserver` et sont entièrement désactivées si le visiteur a activé
 « réduire les animations » dans son système.
+
+Le bandeau d'accueil fait exception : son contenu s'anime en CSS **dès le
+chargement**, sans passer par l'observateur. Le faire attendre retardait
+l'affichage du titre de près d'une seconde — mauvais pour le visiteur comme
+pour le LCP.
+
+Conformément aux recommandations d'ergonomie, un seul élément anime son dégradé
+en continu (le titre du bandeau) : multiplier les animations permanentes
+fatigue l'œil et peut gêner les personnes sensibles au mouvement.
 
 ---
 

@@ -74,7 +74,10 @@
   /* -------------------------------------------------------------
      3. Révélation au défilement
      ------------------------------------------------------------- */
-  var revealables = $$('[data-reveal]');
+  // Le bandeau d'accueil s'anime en CSS dès le chargement (voir styles.css) :
+  // on ne l'observe pas, sinon son contenu resterait masqué jusqu'au premier
+  // passage de l'observateur.
+  var revealables = $$('[data-reveal]').filter(function (el) { return !el.closest('.hero'); });
 
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealables.forEach(function (el) { el.classList.add('is-in'); });

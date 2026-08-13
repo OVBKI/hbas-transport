@@ -1,76 +1,87 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Autoroute au lever du jour avec un semi-remorque en mouvement">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Autoroute de nuit avec un semi-remorque en mouvement">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#CFE4F7"/>
-      <stop offset="45%" stop-color="#EAF2FA"/>
-      <stop offset="100%" stop-color="#FDF7EE"/>
+      <stop offset="0%" stop-color="#05060A"/>
+      <stop offset="52%" stop-color="#0B0E16"/>
+      <stop offset="100%" stop-color="#16121A"/>
     </linearGradient>
     <linearGradient id="asphalt" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#9AA3AC"/>
-      <stop offset="100%" stop-color="#4E565F"/>
+      <stop offset="0%" stop-color="#1A1D25"/>
+      <stop offset="100%" stop-color="#08090C"/>
     </linearGradient>
-    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFD9A8" stop-opacity=".95"/>
-      <stop offset="100%" stop-color="#FFD9A8" stop-opacity="0"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E23434" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#E23434" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="horizonGlow" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#B8324A" stop-opacity=".40"/>
+      <stop offset="100%" stop-color="#B8324A" stop-opacity="0"/>
+    </radialGradient>
     <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#EAF2FA" stop-opacity="1"/>
-      <stop offset="18%" stop-color="#EAF2FA" stop-opacity="0"/>
-      <stop offset="82%" stop-color="#EAF2FA" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#EAF2FA" stop-opacity="1"/>
+      <stop offset="0%" stop-color="#0A0B0E" stop-opacity="1"/>
+      <stop offset="20%" stop-color="#0A0B0E" stop-opacity="0"/>
+      <stop offset="80%" stop-color="#0A0B0E" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0A0B0E" stop-opacity="1"/>
     </linearGradient>
   </defs>
 
   <rect width="1600" height="900" fill="url(#sky)"/>
-  <ellipse cx="1180" cy="600" rx="520" ry="260" fill="url(#sun)"/>
+  <ellipse cx="800" cy="616" rx="760" ry="240" fill="url(#horizonGlow)"/>
 
-  <!-- horizon hills -->
-  <path d="M0 592 L200 566 L360 584 L560 552 L760 578 L980 548 L1220 576 L1420 556 L1600 574 L1600 620 L0 620 Z" fill="#C7D6E2" opacity=".7"/>
-  <path d="M0 606 L260 588 L470 604 L700 582 L960 602 L1230 586 L1600 604 L1600 640 L0 640 Z" fill="#AFC2D2" opacity=".6"/>
+  <!-- collines nocturnes -->
+  <path d="M0 592 L200 566 L360 584 L560 552 L760 578 L980 548 L1220 576 L1420 556 L1600 574 L1600 640 L0 640 Z" fill="#111520" opacity=".9"/>
+  <path d="M0 606 L260 588 L470 604 L700 582 L960 602 L1230 586 L1600 604 L1600 660 L0 660 Z" fill="#0C0F17"/>
 
-  <!-- road -->
+  <!-- chaussée -->
   <path d="M0 900 L610 612 L990 612 L1600 900 Z" fill="url(#asphalt)"/>
-  <path d="M0 900 L610 612 L640 612 L120 900 Z" fill="#F2F4F6" opacity=".85"/>
-  <path d="M1600 900 L990 612 L960 612 L1480 900 Z" fill="#F2F4F6" opacity=".85"/>
+  <path d="M0 900 L610 612 L640 612 L120 900 Z" fill="#3A4150" opacity=".55"/>
+  <path d="M1600 900 L990 612 L960 612 L1480 900 Z" fill="#3A4150" opacity=".55"/>
 
-  <!-- centre dashes (perspective) -->
-  <g fill="#F6F1E6" opacity=".9">
+  <!-- marquage central en perspective -->
+  <g fill="#C9CEDA" opacity=".55">
     <path d="M796 616 L804 616 L806 636 L794 636 Z"/>
     <path d="M792 652 L808 652 L811 684 L789 684 Z"/>
     <path d="M786 706 L814 706 L819 754 L781 754 Z"/>
     <path d="M776 784 L824 784 L832 862 L768 862 Z"/>
   </g>
 
-  <!-- guard rail -->
-  <g stroke="#DCE3E9" stroke-width="5" opacity=".85">
+  <!-- glissières -->
+  <g stroke="#2A3040" stroke-width="5">
     <path d="M602 606 L360 700 L60 828" fill="none"/>
     <path d="M998 606 L1240 700 L1540 828" fill="none"/>
   </g>
 
-  <!-- semi-trailer silhouette -->
+  <!-- semi-remorque, vu de l'arrière : feux rouges -->
   <g transform="translate(560 452) scale(1.06)">
-    <rect x="60" y="0" width="300" height="120" rx="6" fill="#FFFFFF"/>
-    <rect x="60" y="0" width="300" height="120" rx="6" fill="none" stroke="#D7DDE4" stroke-width="3"/>
-    <rect x="60" y="86" width="300" height="12" fill="#FF5B12"/>
-    <path d="M0 34 L34 34 L54 62 L54 120 L0 120 Z" fill="#1B2530"/>
-    <path d="M6 40 L32 40 L48 62 L6 62 Z" fill="#9FC4E8"/>
-    <rect x="0" y="104" width="360" height="8" fill="#2B3540"/>
-    <g fill="#232C36">
+    <ellipse cx="180" cy="150" rx="250" ry="46" fill="url(#glow)"/>
+    <rect x="60" y="0" width="300" height="120" rx="6" fill="#171B23"/>
+    <rect x="60" y="0" width="300" height="120" rx="6" fill="none" stroke="#2E343F" stroke-width="3"/>
+    <rect x="60" y="86" width="300" height="12" fill="#E23434"/>
+    <path d="M0 34 L34 34 L54 62 L54 120 L0 120 Z" fill="#0E1118"/>
+    <path d="M6 40 L32 40 L48 62 L6 62 Z" fill="#2B3648"/>
+    <rect x="0" y="104" width="360" height="8" fill="#1A1E27"/>
+    <g fill="#0C0F15">
       <circle cx="24" cy="124" r="17"/><circle cx="284" cy="124" r="17"/><circle cx="322" cy="124" r="17"/>
     </g>
-    <g fill="#8A949E">
+    <g fill="#333B49">
       <circle cx="24" cy="124" r="7"/><circle cx="284" cy="124" r="7"/><circle cx="322" cy="124" r="7"/>
     </g>
-    <ellipse cx="180" cy="146" rx="200" ry="10" fill="#3A424B" opacity=".35"/>
+    <!-- feux arrière -->
+    <g>
+      <rect x="66" y="96" width="26" height="12" rx="4" fill="#FF4A3D"/>
+      <rect x="328" y="96" width="26" height="12" rx="4" fill="#FF4A3D"/>
+      <ellipse cx="79" cy="102" rx="34" ry="18" fill="#FF4A3D" opacity=".35"/>
+      <ellipse cx="341" cy="102" rx="34" ry="18" fill="#FF4A3D" opacity=".35"/>
+    </g>
   </g>
 
-  <!-- motion streaks -->
-  <g stroke="#FFFFFF" stroke-linecap="round" opacity=".5">
-    <path d="M300 520 L470 520" stroke-width="5"/>
-    <path d="M230 548 L420 548" stroke-width="4"/>
-    <path d="M1120 528 L1300 528" stroke-width="5"/>
-    <path d="M1180 556 L1390 556" stroke-width="4"/>
+  <!-- traînées de vitesse -->
+  <g stroke="#FF6A50" stroke-linecap="round" opacity=".35">
+    <path d="M300 520 L470 520" stroke-width="4"/>
+    <path d="M230 548 L420 548" stroke-width="3"/>
+    <path d="M1120 528 L1300 528" stroke-width="4"/>
+    <path d="M1180 556 L1390 556" stroke-width="3"/>
   </g>
 
-  <rect width="1600" height="900" fill="url(#fade)" opacity=".55"/>
+  <rect width="1600" height="900" fill="url(#fade)" opacity=".6"/>
 </svg>
