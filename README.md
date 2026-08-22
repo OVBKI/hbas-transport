@@ -67,8 +67,9 @@ Aucune étape de compilation : les fichiers sont servis tels quels.
     ├── js/
     │   └── main.js                  Navigation, animations, validation du formulaire
     ├── fonts/                       Polices auto-hébergées (woff2)
-    ├── img/                         Illustrations SVG (à remplacer par des photos)
-    └── video/                       Emplacement de la vidéo du bandeau
+    ├── img/                         Visuels de la flotte et de partage
+    ├── og/                          Gabarit de l'image de partage
+    └── video/                       Vidéo de fond du bandeau
 ```
 
 ---
@@ -85,7 +86,6 @@ Ces éléments sont des **valeurs de remplacement** volontairement visibles :
 | **Infos légales** (BCE, TVA, siège, hébergeur, licence) | `mentions-legales.html` | surlignées en orange |
 | **Adresse pour Google Maps** | `index.html`, section contact | carte désactivée |
 | **Logo** | SVG intégré dans l'en-tête et le pied de page | chevrons génériques |
-| **Photos** | `assets/img/` | illustrations SVG |
 
 > Astuce : recherchez `hbas-transport.be` et `XXX` dans le projet pour tout retrouver.
 
@@ -108,20 +108,32 @@ en production.
 Le formulaire intègre déjà : validation des champs, messages d'erreur en français,
 pot de miel anti-spam et case de consentement RGPD.
 
-### 2. Remplacer les visuels
+### 2. Visuels
 
-Les illustrations SVG livrées sont de qualité correcte mais restent des
-**substituts** : de vraies photos de la flotte transformeront la crédibilité du site.
+Les **trois véhicules de la flotte** sont en place : rendus fournis par le
+client, découpés depuis une planche unique et exportés en WebP (avec repli
+JPEG via `<picture>`).
 
-| Fichier | À remplacer par |
+| Fichier | État |
 |---|---|
-| `img/hero-poster.svg` | Image de repli du bandeau, visible tant que la vidéo n'est pas lue |
-| `img/vehicule-leger.svg` | Photo du véhicule 20 m³ |
-| `img/porteur-19t.svg` | Photo du porteur 19 t |
-| `img/semi-40t.svg` | Photo du semi-remorque 40 t |
-> L'image de partage (`img/og-image.png`) est déjà un vrai PNG 1200 × 630, généré
-> depuis le gabarit [`assets/og/template.html`](assets/og/README.md) — rien à faire,
-> sauf si vous modifiez la charte.
+| `img/vehicule-leger.webp` / `.jpg` | ✅ rendu du véhicule 20 m³ |
+| `img/porteur-19t.webp` / `.jpg` | ✅ rendu du porteur 19 t |
+| `img/semi-40t.webp` / `.jpg` | ✅ rendu du semi-remorque 40 t |
+| `img/hero-poster.svg` | illustration de repli du bandeau, sous la vidéo |
+
+Les trois visuels partagent un **cadre de 1255 × 307 px (≈ 4:1)**, et les cartes
+de la flotte reprennent ce ratio exact — aucun recadrage, donc aucun véhicule
+tronqué. Les écarts de taille sont volontairement conservés : le semi-remorque
+occupe plus de place dans son cadre que l'utilitaire.
+
+> **Pour remplacer un véhicule ou en ajouter un**, exportez au même ratio
+> (1255 × 307) sur le même fond (dégradé `#11141A` → `#161A20`) : le visuel se
+> fondra dans la carte sans réglage. Un autre ratio nécessiterait d'ajuster
+> `aspect-ratio` sur `.rig__media` dans `assets/css/styles.css`.
+
+L'image de partage (`img/og-image.png`) est un PNG 1200 × 630 généré depuis le
+gabarit [`assets/og/template.html`](assets/og/README.md) — rien à faire, sauf si
+vous modifiez la charte.
 
 Conservez les noms de fichiers pour n'avoir aucun code à modifier — ou ajustez
 les `src` et les attributs `alt` dans `index.html`.
@@ -138,8 +150,11 @@ Dupliquez un bloc `<article class="rig">` dans la section `#flotte` de `index.ht
 <article class="rig" data-reveal="zoom">
   <div class="rig__media">
     <span class="rig__badge">Catégorie</span>
-    <img src="assets/img/mon-vehicule.jpg" width="800" height="450" loading="lazy"
-         decoding="async" alt="Description du véhicule">
+    <picture>
+      <source srcset="assets/img/mon-vehicule.webp" type="image/webp">
+      <img src="assets/img/mon-vehicule.jpg" width="1255" height="307"
+           loading="lazy" decoding="async" alt="Description du véhicule">
+    </picture>
   </div>
   <div class="rig__body">
     <h3>Nom du véhicule</h3>
@@ -155,8 +170,9 @@ Dupliquez un bloc `<article class="rig">` dans la section `#flotte` de `index.ht
 </article>
 ```
 
-L'alternance gauche/droite des images est automatique. Pensez à ajouter le
-service correspondant dans les **données structurées** en bas de `index.html`.
+Le visuel occupe une bande pleine largeur en haut de la carte, le texte se
+répartit ensuite sur deux colonnes. Pensez à ajouter le service correspondant
+dans les **données structurées** en bas de `index.html`.
 
 ---
 

@@ -657,9 +657,12 @@ a:hover { color: #FFA694; }
    --------------------------------------------------------------- */
 .fleet { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
 
+/* Les visuels de la flotte sont des profils très larges (~4:1). Une colonne
+   d'image à côté du texte les recadrerait par les côtés et couperait les
+   véhicules : la bande pleine largeur les montre entiers, à leur échelle
+   relative — un semi doit dominer un utilitaire. */
 .rig {
-  display: grid; gap: 0;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  display: block;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -672,10 +675,18 @@ a:hover { color: #FFA694; }
   transform: translateY(-3px);
   border-color: rgba(226,52,52,.4);
 }
-.rig:nth-child(even) .rig__media { order: 2; }
 
-.rig__media { position: relative; background: var(--deep); }
-.rig__media img { width: 100%; height: 100%; object-fit: cover; min-height: 260px; }
+.rig__media {
+  position: relative;
+  aspect-ratio: 1255 / 307;          /* ratio natif des visuels : aucun recadrage */
+  /* reprend le dégradé de fond des visuels : la jonction avec la carte
+     reste invisible même si le cadrage laisse une marge */
+  background: linear-gradient(180deg, #11141A, #161A20);
+  border-bottom: 1px solid var(--line);
+}
+.rig__media img, .rig__media picture {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
 .rig__badge {
   position: absolute; top: 1.1rem; left: 1.1rem;
   background: rgba(5,6,8,.82); color: var(--txt);
@@ -685,9 +696,24 @@ a:hover { color: #FFA694; }
   letter-spacing: .16em; text-transform: uppercase;
   padding: .45rem .8rem; border-radius: 100px;
 }
+/* La carte occupant toute la largeur, le texte se répartit sur deux colonnes :
+   identité et caractéristiques à gauche, usages à droite. En une seule
+   colonne, les deux tiers droits de la carte resteraient vides. */
 .rig__body {
-  padding: clamp(1.7rem, 3vw, 2.8rem);
-  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(1.7rem, 3vw, 2.6rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.rig__body > h3,
+.rig__body > .rig__tag,
+.rig__body > .rig__specs { grid-column: 1; }
+.rig__body > ul { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
+
+@media (max-width: 720px) {
+  .rig__body { grid-template-columns: 1fr; }
+  .rig__body > ul { grid-column: 1; grid-row: auto; }
 }
 .rig__body h3 {
   font-size: clamp(1.5rem, 1.15rem + 1.3vw, 2.2rem);
@@ -697,7 +723,8 @@ a:hover { color: #FFA694; }
   font-family: var(--mono); font-size: .68rem; letter-spacing: .16em;
   text-transform: uppercase; color: var(--red-lt); margin-bottom: 1.4rem;
 }
-.rig__specs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.rig__specs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 0; }
+@media (max-width: 720px) { .rig__specs { margin-bottom: 1.5rem; } }
 .rig__specs span {
   font-family: var(--mono); font-size: .7rem; font-weight: 600;
   letter-spacing: .07em; color: var(--txt-2);
@@ -717,10 +744,12 @@ a:hover { color: #FFA694; }
   content: ""; width: 8px; height: 8px; margin-top: .55rem; flex: none;
   background: var(--red); transform: rotate(45deg);
 }
-@media (max-width: 900px) {
-  .rig { grid-template-columns: 1fr; }
-  .rig:nth-child(even) .rig__media { order: 0; }
-  .rig__media img { min-height: 0; }
+/* Sur mobile on garde le ratio natif : la bande est basse, mais le véhicule
+   est vu ENTIER. Un recadrage plus haut coupait l'avant et l'arrière.
+   La pastille est masquée : elle répète le titre placé juste en dessous et
+   passait par-dessus le véhicule sur une bande aussi courte. */
+@media (max-width: 720px) {
+  .rig__badge { display: none; }
 }
 
 .fleet__note {
