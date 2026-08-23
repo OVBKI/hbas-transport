@@ -12,7 +12,7 @@ Il suffit de déposer le dossier sur n'importe quel hébergement web.
 | | |
 |---|---|
 | **Pages** | Accueil (one-page), Mentions légales, Politique de confidentialité |
-| **Poids de la page d'accueil** | ~1,35 Mo, 10 requêtes (dont 1,1 Mo de vidéo de fond) |
+| **Poids de la page d'accueil** | ~1,39 Mo, 11 requêtes (dont 1,1 Mo de vidéo de fond) |
 | **Core Web Vitals** (mesurés) | LCP ~200 ms · CLS 0,0005 |
 | **Responsive** | Testé de 320 px à 1920 px, sans débordement |
 | **Accessibilité** | Contrastes WCAG AA validés (fonds `rgba` composés, dégradés testés arrêt par arrêt), navigation clavier, libellés de formulaire |
@@ -85,7 +85,6 @@ Ces éléments sont des **valeurs de remplacement** volontairement visibles :
 | **Nom de domaine** | balises `canonical`, Open Graph, `sitemap.xml`, `robots.txt` | `www.hbas-transport.be` |
 | **Infos légales** (BCE, TVA, siège, hébergeur, licence) | `mentions-legales.html` | surlignées en orange |
 | **Adresse pour Google Maps** | `index.html`, section contact | carte désactivée |
-| **Logo** | SVG intégré dans l'en-tête et le pied de page | chevrons génériques |
 
 > Astuce : recherchez `hbas-transport.be` et `XXX` dans le projet pour tout retrouver.
 
@@ -177,6 +176,8 @@ JPEG via `<picture>`).
 | `img/porteur-19t.webp` / `.jpg` | ✅ rendu du porteur 19 t |
 | `img/semi-40t.webp` / `.jpg` | ✅ rendu du semi-remorque 40 t |
 | `img/hero-poster.svg` | illustration de repli du bandeau, sous la vidéo |
+| `img/logo.webp` / `.png` | ✅ logo officiel, fond détouré |
+| `img/favicon-32.png`, `favicon-180.png`, `apple-touch-icon.png` | ✅ icônes de navigateur, issues du logo |
 
 Les trois visuels partagent un **cadre de 1255 × 307 px (≈ 4:1)**, et les cartes
 de la flotte reprennent ce ratio exact — aucun recadrage, donc aucun véhicule
@@ -198,6 +199,28 @@ les `src` et les attributs `alt` dans `index.html`.
 **Vidéo du bandeau** : déjà en place (`assets/video/hero-camion.mp4`).
 Pour la remplacer ou ajuster le cadrage, voir
 [`assets/video/README.md`](assets/video/README.md).
+
+#### Le logo
+
+Le logo officiel est en place, **fond blanc détouré** (remplissage depuis les
+bords : le blanc intérieur du badge est conservé, seul le fond extérieur est
+rendu transparent).
+
+| Emplacement | Taille | Pourquoi |
+|---|---|---|
+| En-tête | 46 px de haut (40 au défilement) | En dessous de ~80 px le ruban « H.B.A.S TRANSPORT » n'est plus lisible : le libellé typographique à côté prend le relais. |
+| Pied de page | 92 px | Le ruban se lit à cette taille, le libellé typographique devient redondant et est masqué. |
+| Icône de navigateur | 32 / 180 px | Cadrée sur le disque, le ruban qui déborde est coupé pour gagner des pixels utiles. |
+
+> À 16 px (onglet de navigateur), le logo devient nécessairement confus : c'est
+> un badge détaillé, pas une icône. Un **monogramme simplifié** — les initiales
+> ou la silhouette du camion seule — donnerait un bien meilleur résultat à cette
+> taille, si le graphiste peut en fournir un.
+
+> ⚠️ Le logo écrit **« H.B.A.S TRANSPORT »** (avec points) alors que le site
+> écrit partout **« HBAS TRANSPORT »**. À trancher pour uniformiser : titres,
+> balise `title`, données structurées et mentions légales suivent la seconde
+> forme.
 
 ### 3. Ajouter un véhicule à la flotte
 

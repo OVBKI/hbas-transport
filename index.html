@@ -28,8 +28,9 @@
 <meta name="twitter:image" content="https://www.hbas-transport.be/assets/img/og-image.png">
 <meta name="theme-color" content="#0A0B0E">
 
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/img/favicon.svg">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-180.png" sizes="180x180" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
 <!-- Polices -->
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-latin.woff2" crossorigin>
@@ -50,13 +51,11 @@
 <header class="site-header">
   <div class="shell">
     <a class="brand" href="#accueil" aria-label="HBAS TRANSPORT — retour à l’accueil">
-      <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-        <rect width="64" height="64" rx="14" fill="#E23434"/>
-        <g fill="#0A0B0E">
-          <path d="M14 18 L26 32 L14 46 L22 46 L34 32 L22 18 Z"/>
-          <path d="M30 18 L42 32 L30 46 L38 46 L50 32 L38 18 Z"/>
-        </g>
-      </svg>
+      <picture>
+        <source srcset="assets/img/logo.webp" type="image/webp">
+        <img class="brand__mark" src="assets/img/logo.png" width="360" height="291"
+             alt="" decoding="async">
+      </picture>
       <span class="brand__txt">
         <span class="brand__name">HBAS</span>
         <span class="brand__sub">Transport</span>
@@ -728,10 +727,11 @@
 
       <div class="footer__about">
         <a class="brand" href="#accueil" aria-label="HBAS TRANSPORT — retour à l’accueil">
-          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-            <rect width="64" height="64" rx="14" fill="#E23434"/>
-            <g fill="#0A0B0E"><path d="M14 18 L26 32 L14 46 L22 46 L34 32 L22 18 Z"/><path d="M30 18 L42 32 L30 46 L38 46 L50 32 L38 18 Z"/></g>
-          </svg>
+          <picture>
+        <source srcset="assets/img/logo.webp" type="image/webp">
+        <img class="brand__mark" src="assets/img/logo.png" width="360" height="291"
+             alt="" decoding="async">
+      </picture>
           <span class="brand__txt">
             <span class="brand__name">HBAS</span>
             <span class="brand__sub">Transport</span>
