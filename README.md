@@ -80,7 +80,7 @@ Ces éléments sont des **valeurs de remplacement** volontairement visibles :
 
 | Quoi | Où | Valeur actuelle |
 |---|---|---|
-| **Adresse e-mail** | `index.html`, `mentions-legales.html`, `politique-confidentialite.html`, `assets/js/main.js` | `contact@hbas-transport.be` |
+| **Redirection e-mail** | à configurer chez le registrar du domaine (voir § 1 bis) | `info@` → `hbas-transport@hotmail.com` |
 | **Numéro de téléphone** | mêmes fichiers | `+32 (0)XXX XX XX XX` |
 | **Nom de domaine** | balises `canonical`, Open Graph, `sitemap.xml`, `robots.txt` | `www.hbas-transport.be` |
 | **Infos légales** (BCE, TVA, siège, hébergeur, licence) | `mentions-legales.html` | surlignées en orange |
@@ -96,7 +96,7 @@ Ouvrez `assets/js/main.js` et renseignez `CONFIG` en haut du fichier :
 ```js
 var CONFIG = {
   formEndpoint: 'https://formspree.io/f/xxxxxxxx',  // votre service
-  contactEmail: 'contact@hbas-transport.be'
+  contactEmail: 'info@hbas-transport.be'
 };
 ```
 
@@ -107,6 +107,63 @@ en production.
 
 Le formulaire intègre déjà : validation des champs, messages d'erreur en français,
 pot de miel anti-spam et case de consentement RGPD.
+
+---
+
+### 1 bis. Faire arriver les demandes sur la boîte Hotmail
+
+L'adresse **affichée sur le site est `info@hbas-transport.be`** — c'est celle que
+voient les visiteurs, dans la section contact, les mentions légales et les données
+structurées. La boîte réellement relevée peut être une autre.
+
+> ⚠️ **Rien de tout cela ne se règle dans le code du site.** Une redirection
+> d'e-mails se configure chez le fournisseur du domaine ou du service de
+> formulaire. Les fichiers du site ne peuvent pas la mettre en place.
+
+Deux chemins, cumulables :
+
+#### A. Le formulaire livre directement dans la boîte Hotmail
+
+Le service de formulaire décide seul du destinataire. Dans Formspree, Web3Forms
+ou équivalent, mettez **`hbas-transport@hotmail.com`** comme destinataire, puis
+collez la clé du formulaire dans `formEndpoint`.
+
+Avantage : ça marche immédiatement, même sans hébergement e-mail sur le domaine.
+Limite : ça ne couvre **que** le formulaire. Une personne qui écrit directement à
+`info@hbas-transport.be` — l'adresse affichée partout sur le site — n'arrivera
+nulle part tant que le point B n'est pas fait.
+
+#### B. Une redirection sur le domaine (nécessaire pour couvrir tout le reste)
+
+Chez le registrar / hébergeur du domaine `hbas-transport.be` (Combell, One.com,
+OVH, Gandi…), cherchez **« Alias e-mail », « Redirection » ou « Forward »** et
+créez :
+
+```
+info@hbas-transport.be   →   hbas-transport@hotmail.com
+```
+
+C'est en général **gratuit** et ne demande pas de vraie boîte aux lettres : un
+alias de redirection suffit. Comptez quelques minutes à quelques heures de
+propagation.
+
+**Trois points à ne pas rater :**
+
+1. **Le spam.** Un message redirigé arrive chez Hotmail avec l'expéditeur
+   d'origine mais depuis un autre serveur, ce qui casse la vérification SPF.
+   Ajoutez `info@hbas-transport.be` aux **expéditeurs approuvés** dans Outlook.com
+   et surveillez le dossier Courrier indésirable les premiers jours.
+
+2. **Répondre.** Une réponse partirait par défaut depuis l'adresse Hotmail, ce
+   qui fait perdre le bénéfice de l'adresse professionnelle. Dans Outlook.com,
+   ajoutez `info@hbas-transport.be` comme adresse d'envoi
+   (*Paramètres → Courrier → Synchroniser la messagerie*) pour répondre depuis
+   l'adresse du domaine.
+
+3. **Cohérence.** L'adresse affichée doit rester `info@hbas-transport.be`
+   partout : mentions légales, données structurées et fiche Google Business
+   Profile. Une adresse Hotmail visible sur un site d'entreprise dessert la
+   crédibilité — et Google pénalise les incohérences de coordonnées.
 
 ### 2. Visuels
 
