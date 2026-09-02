@@ -293,7 +293,7 @@ Section **Contact** avec un formulaire structuré. Champs :
 | **Technologies** | HTML5, CSS3, JavaScript — ou framework moderne (Next.js / Astro) |
 | **Formulaire** | Envoi e-mail (service type Formspree, ou back-end léger / fonction serverless) |
 | **Hébergement** | Hébergement web rapide avec **HTTPS** (certificat SSL) |
-| **Nom de domaine** | À réserver (ex. `hbas-transport.be`) |
+| **Nom de domaine** | À réserver (ex. `hbastransport.com`) |
 | **Compatibilité navigateurs** | Chrome, Firefox, Safari, Edge (2 dernières versions) |
 | **Analytics** | Suivi d'audience respectueux de la vie privée (ex. Plausible / Matomo / GA4) |
 

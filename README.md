@@ -82,11 +82,10 @@ Ces éléments sont des **valeurs de remplacement** volontairement visibles :
 |---|---|---|
 | **Redirection e-mail** | à configurer chez le registrar du domaine (voir § 1 bis) | `info@` → `hbas-transport@hotmail.com` |
 | **Numéro de téléphone** | mêmes fichiers | `+32 (0)XXX XX XX XX` |
-| **Nom de domaine** | balises `canonical`, Open Graph, `sitemap.xml`, `robots.txt` | `www.hbas-transport.be` |
 | **Infos légales** (BCE, TVA, siège, hébergeur, licence) | `mentions-legales.html` | surlignées en orange |
 | **Adresse pour Google Maps** | `index.html`, section contact | carte désactivée |
 
-> Astuce : recherchez `hbas-transport.be` et `XXX` dans le projet pour tout retrouver.
+> Astuce : recherchez `XXX` dans le projet pour retrouver ce qui reste à compléter.
 
 ### 1. Brancher le formulaire de devis
 
@@ -95,7 +94,7 @@ Ouvrez `assets/js/main.js` et renseignez `CONFIG` en haut du fichier :
 ```js
 var CONFIG = {
   formEndpoint: 'https://formspree.io/f/xxxxxxxx',  // votre service
-  contactEmail: 'info@hbas-transport.be'
+  contactEmail: 'info@hbastransport.com'
 };
 ```
 
@@ -111,7 +110,7 @@ pot de miel anti-spam et case de consentement RGPD.
 
 ### 1 bis. Faire arriver les demandes sur la boîte Hotmail
 
-L'adresse **affichée sur le site est `info@hbas-transport.be`** — c'est celle que
+L'adresse **affichée sur le site est `info@hbastransport.com`** — c'est celle que
 voient les visiteurs, dans la section contact, les mentions légales et les données
 structurées. La boîte réellement relevée peut être une autre.
 
@@ -129,17 +128,17 @@ collez la clé du formulaire dans `formEndpoint`.
 
 Avantage : ça marche immédiatement, même sans hébergement e-mail sur le domaine.
 Limite : ça ne couvre **que** le formulaire. Une personne qui écrit directement à
-`info@hbas-transport.be` — l'adresse affichée partout sur le site — n'arrivera
+`info@hbastransport.com` — l'adresse affichée partout sur le site — n'arrivera
 nulle part tant que le point B n'est pas fait.
 
 #### B. Une redirection sur le domaine (nécessaire pour couvrir tout le reste)
 
-Chez le registrar / hébergeur du domaine `hbas-transport.be` (Combell, One.com,
+Chez le registrar / hébergeur du domaine `hbastransport.com` (Combell, One.com,
 OVH, Gandi…), cherchez **« Alias e-mail », « Redirection » ou « Forward »** et
 créez :
 
 ```
-info@hbas-transport.be   →   hbas-transport@hotmail.com
+info@hbastransport.com   →   hbas-transport@hotmail.com
 ```
 
 C'est en général **gratuit** et ne demande pas de vraie boîte aux lettres : un
@@ -150,16 +149,16 @@ propagation.
 
 1. **Le spam.** Un message redirigé arrive chez Hotmail avec l'expéditeur
    d'origine mais depuis un autre serveur, ce qui casse la vérification SPF.
-   Ajoutez `info@hbas-transport.be` aux **expéditeurs approuvés** dans Outlook.com
+   Ajoutez `info@hbastransport.com` aux **expéditeurs approuvés** dans Outlook.com
    et surveillez le dossier Courrier indésirable les premiers jours.
 
 2. **Répondre.** Une réponse partirait par défaut depuis l'adresse Hotmail, ce
    qui fait perdre le bénéfice de l'adresse professionnelle. Dans Outlook.com,
-   ajoutez `info@hbas-transport.be` comme adresse d'envoi
+   ajoutez `info@hbastransport.com` comme adresse d'envoi
    (*Paramètres → Courrier → Synchroniser la messagerie*) pour répondre depuis
    l'adresse du domaine.
 
-3. **Cohérence.** L'adresse affichée doit rester `info@hbas-transport.be`
+3. **Cohérence.** L'adresse affichée doit rester `info@hbastransport.com`
    partout : mentions légales, données structurées et fiche Google Business
    Profile. Une adresse Hotmail visible sur un site d'entreprise dessert la
    crédibilité — et Google pénalise les incohérences de coordonnées.
@@ -253,6 +252,63 @@ Dupliquez un bloc `<article class="rig">` dans la section `#flotte` de `index.ht
 Le visuel occupe une bande pleine largeur en haut de la carte, le texte se
 répartit ensuite sur deux colonnes. Pensez à ajouter le service correspondant
 dans les **données structurées** en bas de `index.html`.
+
+---
+
+## Mise en ligne sur Vercel
+
+Le domaine du site est **`hbastransport.com`** (apex, sans `www`) — c'est la
+forme retenue dans les balises `canonical`, l'Open Graph, le `sitemap.xml`,
+le `robots.txt` et les données structurées. Pour passer à `www`, remplacez
+`https://hbastransport.com` par `https://www.hbastransport.com` dans ces
+mêmes fichiers, et inversez la redirection dans Vercel.
+
+### Déploiement
+
+Le site est statique : dans Vercel, importez le dépôt, **framework preset
+« Other »**, aucune commande de build, répertoire de sortie à la racine.
+
+### Domaine — sans casser la messagerie
+
+Le domaine est enregistré via Google Workspace, qui sert aussi la messagerie
+professionnelle. **Site et e-mail cohabitent** : ce sont des types
+d'enregistrements DNS différents.
+
+Dans *Vercel → Settings → Domains*, ajoutez `hbastransport.com` **et**
+`www.hbastransport.com` (celui-ci en redirection vers le premier). Vercel
+affiche alors les enregistrements à créer chez le registrar — typiquement :
+
+| Nom | Type | Valeur |
+|---|---|---|
+| `@` | A | `76.76.21.21` |
+| `www` | CNAME | `cname.vercel-dns.com` |
+
+> Utilisez les valeurs **affichées par Vercel**, pas celles recopiées ici :
+> elles peuvent changer.
+
+> 🚨 **Ne changez pas les serveurs de noms (nameservers) vers Vercel.**
+> L'hébergement DNS basculerait chez Vercel et les enregistrements **MX
+> disparaîtraient** : la messagerie professionnelle tomberait aussitôt.
+> Ajoutez uniquement les enregistrements A et CNAME.
+
+**À ne jamais supprimer**, sous peine de casser la messagerie :
+
+- les enregistrements **MX** (routage Google Workspace) ;
+- les **TXT** de SPF, DKIM (`google._domainkey`) et DMARC (`_dmarc`) ;
+- le TXT de vérification de domaine Google.
+
+Le certificat HTTPS est émis automatiquement par Vercel dès la propagation DNS.
+
+### En-têtes HTTP
+
+[`vercel.json`](vercel.json) définit la politique de cache et quelques en-têtes
+de sécurité :
+
+| Chemin | Cache | Pourquoi |
+|---|---|---|
+| `assets/fonts/` | 1 an, `immutable` | Les polices ne changent jamais sous le même nom. |
+| `assets/img/`, `assets/video/` | 1 jour + `stale-while-revalidate` | Assez long pour éviter de retélécharger la vidéo de 1,1 Mo à chaque visite, assez court pour qu'un remplacement de visuel soit vu rapidement. |
+| `assets/css/`, `assets/js/` | revalidation systématique | Les noms de fichiers ne sont pas versionnés : un cache long figerait une correction pendant des jours. |
 
 ---
 
