@@ -81,11 +81,11 @@ Ces éléments sont des **valeurs de remplacement** volontairement visibles :
 | Quoi | Où | Valeur actuelle |
 |---|---|---|
 | **Redirection e-mail** | à configurer chez le registrar du domaine (voir § 1 bis) | `info@` → `hbas-transport@hotmail.com` |
-| **Numéro de téléphone** | mêmes fichiers | `+32 (0)XXX XX XX XX` |
 | **Infos légales** (BCE, TVA, siège, hébergeur, licence) | `mentions-legales.html` | surlignées en orange |
 | **Adresse pour Google Maps** | `index.html`, section contact | carte désactivée |
 
-> Astuce : recherchez `XXX` dans le projet pour retrouver ce qui reste à compléter.
+> Les coordonnées sont renseignées : `service@hbastransport.com`,
+> `+32 488 80 30 99` et `+32 485 67 66 02`.
 
 ### 1. Brancher le formulaire de devis
 
@@ -94,7 +94,7 @@ Ouvrez `assets/js/main.js` et renseignez `CONFIG` en haut du fichier :
 ```js
 var CONFIG = {
   formEndpoint: 'https://formspree.io/f/xxxxxxxx',  // votre service
-  contactEmail: 'info@hbastransport.com'
+  contactEmail: 'service@hbastransport.com'
 };
 ```
 
@@ -110,7 +110,7 @@ pot de miel anti-spam et case de consentement RGPD.
 
 ### 1 bis. Faire arriver les demandes sur la boîte Hotmail
 
-L'adresse **affichée sur le site est `info@hbastransport.com`** — c'est celle que
+L'adresse **affichée sur le site est `service@hbastransport.com`** — c'est celle que
 voient les visiteurs, dans la section contact, les mentions légales et les données
 structurées. La boîte réellement relevée peut être une autre.
 
@@ -128,7 +128,7 @@ collez la clé du formulaire dans `formEndpoint`.
 
 Avantage : ça marche immédiatement, même sans hébergement e-mail sur le domaine.
 Limite : ça ne couvre **que** le formulaire. Une personne qui écrit directement à
-`info@hbastransport.com` — l'adresse affichée partout sur le site — n'arrivera
+`service@hbastransport.com` — l'adresse affichée partout sur le site — n'arrivera
 nulle part tant que le point B n'est pas fait.
 
 #### B. Une redirection sur le domaine (nécessaire pour couvrir tout le reste)
@@ -138,7 +138,7 @@ OVH, Gandi…), cherchez **« Alias e-mail », « Redirection » ou « Forward �
 créez :
 
 ```
-info@hbastransport.com   →   hbas-transport@hotmail.com
+service@hbastransport.com   →   hbas-transport@hotmail.com
 ```
 
 C'est en général **gratuit** et ne demande pas de vraie boîte aux lettres : un
@@ -149,16 +149,16 @@ propagation.
 
 1. **Le spam.** Un message redirigé arrive chez Hotmail avec l'expéditeur
    d'origine mais depuis un autre serveur, ce qui casse la vérification SPF.
-   Ajoutez `info@hbastransport.com` aux **expéditeurs approuvés** dans Outlook.com
+   Ajoutez `service@hbastransport.com` aux **expéditeurs approuvés** dans Outlook.com
    et surveillez le dossier Courrier indésirable les premiers jours.
 
 2. **Répondre.** Une réponse partirait par défaut depuis l'adresse Hotmail, ce
    qui fait perdre le bénéfice de l'adresse professionnelle. Dans Outlook.com,
-   ajoutez `info@hbastransport.com` comme adresse d'envoi
+   ajoutez `service@hbastransport.com` comme adresse d'envoi
    (*Paramètres → Courrier → Synchroniser la messagerie*) pour répondre depuis
    l'adresse du domaine.
 
-3. **Cohérence.** L'adresse affichée doit rester `info@hbastransport.com`
+3. **Cohérence.** L'adresse affichée doit rester `service@hbastransport.com`
    partout : mentions légales, données structurées et fiche Google Business
    Profile. Une adresse Hotmail visible sur un site d'entreprise dessert la
    crédibilité — et Google pénalise les incohérences de coordonnées.

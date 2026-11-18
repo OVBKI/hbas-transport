@@ -15,7 +15,7 @@
     formEndpoint: '',
 
     // Adresse de réception (utilisée par le repli e-mail).
-    contactEmail: 'info@hbastransport.com'
+    contactEmail: 'service@hbastransport.com'
   };
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
