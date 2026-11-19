@@ -1,18 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!-- Les trois langues sont déclarées comme alternatives les unes des autres :
+     Google regroupe ainsi les versions au lieu de les traiter comme du contenu
+     dupliqué, et sert la bonne langue selon le visiteur. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ───────── Accueil ───────── -->
   <url>
     <loc>https://hbastransport.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://hbastransport.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hbastransport.com/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ───────── Mentions légales ───────── -->
+  <url>
     <loc>https://hbastransport.com/mentions-legales.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/juridische-vermeldingen.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/mentions-legales.html"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://hbastransport.com/politique-confidentialite.html</loc>
+    <loc>https://hbastransport.com/en/legal-notice.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/juridische-vermeldingen.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/mentions-legales.html"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://hbastransport.com/nl/juridische-vermeldingen.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/juridische-vermeldingen.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/mentions-legales.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ───────── Politique de confidentialité ───────── -->
+  <url>
+    <loc>https://hbastransport.com/politique-confidentialite.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/politique-confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/politique-confidentialite.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hbastransport.com/en/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/politique-confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/politique-confidentialite.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hbastransport.com/nl/privacybeleid.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hbastransport.com/politique-confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hbastransport.com/en/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hbastransport.com/nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hbastransport.com/politique-confidentialite.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

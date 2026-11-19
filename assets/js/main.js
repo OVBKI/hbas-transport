@@ -18,6 +18,81 @@
     contactEmail: 'service@hbastransport.com'
   };
 
+  /* -------------------------------------------------------------
+     Textes de l'interface, selon la langue de la page
+     La langue est lue sur <html lang="…"> : le script est commun aux trois
+     versions du site, il n'y a qu'un fichier à maintenir.
+     ------------------------------------------------------------- */
+  var LANGUE = (document.documentElement.lang || 'fr').slice(0, 2);
+
+  var I18N = {
+    fr: {
+      champs: { nom: 'Nom', societe: 'Société', telephone: 'Téléphone', email: 'E-mail',
+                chargement: 'Lieu de chargement', livraison: 'Lieu de livraison',
+                date: 'Date souhaitée', marchandise: 'Type de marchandise',
+                poids: 'Poids ou volume', message: 'Message' },
+      requis:     'Ce champ est obligatoire.',
+      emailKo:    'Adresse e-mail invalide.',
+      telKo:      'Numéro de téléphone invalide.',
+      consentKo:  'Votre accord est nécessaire pour traiter la demande.',
+      corriger:   'Merci de corriger les champs signalés avant l’envoi.',
+      envoi:      'Envoi en cours…',
+      okTitre:    'Demande envoyée.',
+      okTexte:    ' Merci ! Nous revenons vers vous rapidement avec votre devis gratuit.',
+      koTitre:    'L’envoi a échoué.',
+      koTexte:    ' Merci de réessayer ou de nous contacter par téléphone ou e-mail.',
+      mailTitre:  'Votre messagerie s’ouvre',
+      mailTexte:  ' avec la demande pré-remplie. Il ne reste qu’à l’envoyer. Vous pouvez aussi nous appeler directement.',
+      objet:      'Demande de devis — ',
+      signature:  '\n\n— Envoyé depuis le site hbastransport.com',
+      carte:      'Localisation de HBAS TRANSPORT'
+    },
+    en: {
+      champs: { nom: 'Name', societe: 'Company', telephone: 'Phone', email: 'Email',
+                chargement: 'Loading location', livraison: 'Delivery location',
+                date: 'Preferred date', marchandise: 'Type of goods',
+                poids: 'Weight or volume', message: 'Message' },
+      requis:     'This field is required.',
+      emailKo:    'Invalid email address.',
+      telKo:      'Invalid phone number.',
+      consentKo:  'Your agreement is needed to process the request.',
+      corriger:   'Please correct the highlighted fields before sending.',
+      envoi:      'Sending…',
+      okTitre:    'Request sent.',
+      okTexte:    ' Thank you! We will get back to you shortly with your free quote.',
+      koTitre:    'Sending failed.',
+      koTexte:    ' Please try again, or contact us by phone or email.',
+      mailTitre:  'Your email app is opening',
+      mailTexte:  ' with the request pre-filled. All that is left is to send it. You can also call us directly.',
+      objet:      'Quote request — ',
+      signature:  '\n\n— Sent from hbastransport.com',
+      carte:      'HBAS TRANSPORT location'
+    },
+    nl: {
+      champs: { nom: 'Naam', societe: 'Bedrijf', telephone: 'Telefoon', email: 'E-mail',
+                chargement: 'Laadplaats', livraison: 'Losplaats',
+                date: 'Gewenste datum', marchandise: 'Soort goederen',
+                poids: 'Gewicht of volume', message: 'Bericht' },
+      requis:     'Dit veld is verplicht.',
+      emailKo:    'Ongeldig e-mailadres.',
+      telKo:      'Ongeldig telefoonnummer.',
+      consentKo:  'Uw akkoord is nodig om de aanvraag te behandelen.',
+      corriger:   'Gelieve de aangeduide velden te corrigeren voor u verzendt.',
+      envoi:      'Bezig met verzenden…',
+      okTitre:    'Aanvraag verzonden.',
+      okTexte:    ' Bedankt! Wij komen snel bij u terug met uw gratis offerte.',
+      koTitre:    'Verzenden mislukt.',
+      koTexte:    ' Probeer het opnieuw of neem contact op per telefoon of e-mail.',
+      mailTitre:  'Uw e-mailprogramma opent',
+      mailTexte:  ' met de vooraf ingevulde aanvraag. U hoeft ze alleen nog te verzenden. U kunt ons ook rechtstreeks bellen.',
+      objet:      'Offerteaanvraag — ',
+      signature:  '\n\n— Verzonden via hbastransport.com',
+      carte:      'Locatie van HBAS TRANSPORT'
+    }
+  };
+
+  var T = I18N[LANGUE] || I18N.fr;
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
@@ -95,7 +170,7 @@
       var carte = mapBtn.closest('.map');
       var frame = document.createElement('iframe');
       frame.src = mapBtn.getAttribute('data-src');
-      frame.title = 'Localisation de HBAS TRANSPORT';
+      frame.title = T.carte;
       frame.loading = 'lazy';
       frame.referrerPolicy = 'no-referrer-when-downgrade';
       frame.setAttribute('allowfullscreen', '');
@@ -203,12 +278,7 @@
   var statusBox = $('#form-status');
   var submitBtn = $('#form-submit');
 
-  var LABELS = {
-    nom: 'Nom', societe: 'Société', telephone: 'Téléphone', email: 'E-mail',
-    chargement: 'Lieu de chargement', livraison: 'Lieu de livraison',
-    date: 'Date souhaitée', marchandise: 'Type de marchandise',
-    poids: 'Poids ou volume', message: 'Message'
-  };
+  var LABELS = T.champs;
 
   function fieldOf(input) { return input.closest('.field'); }
 
@@ -232,19 +302,19 @@
     var v = (input.value || '').trim();
 
     if (input.required && !v) {
-      setError(input, 'Ce champ est obligatoire.');
+      setError(input, T.requis);
       return false;
     }
     if (input.type === 'email' && v && !/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)) {
-      setError(input, 'Adresse e-mail invalide.');
+      setError(input, T.emailKo);
       return false;
     }
     if (input.type === 'tel' && v && !/^[+0-9][0-9\s().\/-]{6,}$/.test(v)) {
-      setError(input, 'Numéro de téléphone invalide.');
+      setError(input, T.telKo);
       return false;
     }
     if (input.type === 'checkbox' && input.required && !input.checked) {
-      setError(input, 'Votre accord est nécessaire pour traiter la demande.');
+      setError(input, T.consentKo);
       return false;
     }
     clearError(input);
@@ -290,7 +360,7 @@
     controls.forEach(function (el) { if (!validateField(el)) ok = false; });
 
     if (!ok) {
-      showStatus('err', ICON_ERR + '<span>Merci de corriger les champs signalés avant l’envoi.</span>');
+      showStatus('err', ICON_ERR + '<span>' + T.corriger + '</span>');
       var firstBad = $('.field.is-invalid input, .field.is-invalid textarea, .field.is-invalid select', form);
       if (firstBad) { firstBad.focus(); firstBad.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' }); }
       return;
@@ -302,19 +372,19 @@
 
     // --- Repli e-mail si aucun service n'est configuré ---------------
     if (!CONFIG.formEndpoint) {
-      var subject = 'Demande de devis — ' + (data.nom || '') + (data.societe ? ' (' + data.societe + ')' : '');
-      var body = buildSummary(data) + '\n\n— Envoyé depuis le site hbas-transport';
+      var subject = T.objet + (data.nom || '') + (data.societe ? ' (' + data.societe + ')' : '');
+      var body = buildSummary(data) + T.signature;
       window.location.href = 'mailto:' + CONFIG.contactEmail +
         '?subject=' + encodeURIComponent(subject) +
         '&body=' + encodeURIComponent(body);
-      showStatus('ok', ICON_OK + '<span><strong>Votre messagerie s’ouvre</strong> avec la demande pré-remplie. Il ne reste qu’à l’envoyer. Vous pouvez aussi nous appeler directement.</span>');
+      showStatus('ok', ICON_OK + '<span><strong>' + T.mailTitre + '</strong>' + T.mailTexte + '</span>');
       return;
     }
 
     // --- Envoi au service configuré ---------------------------------
     submitBtn.disabled = true;
     var initial = submitBtn.textContent;
-    submitBtn.textContent = 'Envoi en cours…';
+    submitBtn.textContent = T.envoi;
 
     fetch(CONFIG.formEndpoint, {
       method: 'POST',
@@ -325,10 +395,10 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         form.reset();
         controls.forEach(clearError);
-        showStatus('ok', ICON_OK + '<span><strong>Demande envoyée.</strong> Merci ! Nous revenons vers vous rapidement avec votre devis gratuit.</span>');
+        showStatus('ok', ICON_OK + '<span><strong>' + T.okTitre + '</strong>' + T.okTexte + '</span>');
       })
       .catch(function () {
-        showStatus('err', ICON_ERR + '<span><strong>L’envoi a échoué.</strong> Merci de réessayer ou de nous contacter par téléphone ou e-mail.</span>');
+        showStatus('err', ICON_ERR + '<span><strong>' + T.koTitre + '</strong>' + T.koTexte + '</span>');
       })
       .finally(function () {
         submitBtn.disabled = false;

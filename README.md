@@ -11,12 +11,12 @@ Il suffit de déposer le dossier sur n'importe quel hébergement web.
 
 | | |
 |---|---|
-| **Pages** | Accueil (one-page), Mentions légales, Politique de confidentialité |
+| **Pages** | 3 pages × 3 langues = 9 : accueil, mentions légales, politique de confidentialité |
 | **Poids de la page d'accueil** | ~1,39 Mo, 11 requêtes (dont 1,1 Mo de vidéo de fond) |
 | **Core Web Vitals** (mesurés) | LCP ~200 ms · CLS 0,0005 |
 | **Responsive** | Testé de 320 px à 1920 px, sans débordement |
 | **Accessibilité** | Contrastes WCAG AA validés (fonds `rgba` composés, dégradés testés arrêt par arrêt), navigation clavier, libellés de formulaire |
-| **Langue** | Français (`fr-BE`) |
+| **Langues** | Français (par défaut), anglais, néerlandais — URL distinctes et `hreflang` |
 
 ### Direction artistique
 
@@ -53,9 +53,23 @@ Aucune étape de compilation : les fichiers sont servis tels quels.
 
 ```
 .
-├── index.html                       Page d'accueil (toutes les sections)
-├── mentions-legales.html
-├── politique-confidentialite.html
+├── index.html                       Accueil FR — SOURCE, écrite à la main
+├── mentions-legales.html            SOURCE
+├── politique-confidentialite.html   SOURCE
+├── en/                              GÉNÉRÉ — ne pas éditer à la main
+│   ├── index.html
+│   ├── legal-notice.html
+│   └── privacy-policy.html
+├── nl/                              GÉNÉRÉ — ne pas éditer à la main
+│   ├── index.html
+│   ├── juridische-vermeldingen.html
+│   └── privacybeleid.html
+├── tools/                           Générateur des versions traduites
+│   ├── build-i18n.py
+│   ├── strings_home.py
+│   ├── strings_contact.py
+│   └── strings_legal.py
+├── vercel.json
 ├── robots.txt
 ├── sitemap.xml
 ├── docs/
@@ -252,6 +266,54 @@ Dupliquez un bloc `<article class="rig">` dans la section `#flotte` de `index.ht
 Le visuel occupe une bande pleine largeur en haut de la carte, le texte se
 répartit ensuite sur deux colonnes. Pensez à ajouter le service correspondant
 dans les **données structurées** en bas de `index.html`.
+
+---
+
+## Les trois langues
+
+Le site existe en **français, anglais et néerlandais**, à des **URL distinctes** :
+
+| Langue | Accueil | Mentions légales | Confidentialité |
+|---|---|---|---|
+| Français | `/` | `/mentions-legales.html` | `/politique-confidentialite.html` |
+| English | `/en/` | `/en/legal-notice.html` | `/en/privacy-policy.html` |
+| Nederlands | `/nl/` | `/nl/juridische-vermeldingen.html` | `/nl/privacybeleid.html` |
+
+> **Pourquoi des URL séparées plutôt qu'un bouton qui change les textes en
+> JavaScript ?** Parce que Google n'indexe que ce qu'il voit dans le HTML servi.
+> Avec un basculement en JavaScript, une seule version serait référencée et les
+> deux autres n'existeraient pas pour les moteurs — alors que le référencement
+> est un objectif central du projet. Chaque page déclare ses `hreflang`, et le
+> `sitemap.xml` relie les trois versions entre elles.
+
+### Modifier un texte
+
+**Éditez toujours la version française**, qui fait autorité, puis régénérez :
+
+```bash
+python3 tools/build-i18n.py
+```
+
+Les dossiers `en/` et `nl/` sont **entièrement réécrits** : toute modification
+faite directement dedans serait perdue.
+
+Les traductions vivent dans `tools/strings_*.py`, sous forme de triplets
+`(français, anglais, néerlandais)`. Pour changer une phrase, modifiez le
+français dans la page source **et** le triplet correspondant.
+
+Le script se termine par une vérification : si une chaîne française subsiste
+dans un fichier généré, il la signale et sort en erreur. Un texte ajouté en
+français sans sa traduction ne passe donc pas inaperçu.
+
+La correspondance est **insensible aux espaces** : un paragraphe réparti sur
+plusieurs lignes dans le HTML est reconnu à partir de son texte sur une seule
+ligne dans la table.
+
+### Les textes du JavaScript
+
+Les messages du formulaire (erreurs de validation, confirmations) sont dans
+`assets/js/main.js`, dans l'objet `I18N`. Le script lit `<html lang="…">` et
+choisit la langue : **un seul fichier pour les trois versions**.
 
 ---
 

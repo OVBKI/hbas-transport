@@ -1,12 +1,3 @@
-# Système
-.DS_Store
-Thumbs.db
-
-# Éditeurs
-.vscode/
-.idea/
-*.swp
-
-# Journaux et temporaires
-*.log
-.cache/
+# Caches Python du générateur de traductions
+__pycache__/
+*.pyc

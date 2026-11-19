@@ -344,6 +344,24 @@ a:hover { color: #FFA694; }
 .nav__link:hover, .nav__link[aria-current="true"] { color: var(--txt); }
 .nav__link:hover::after, .nav__link[aria-current="true"]::after { right: 0; }
 
+/* Sélecteur de langue — trois codes courts, la langue active en évidence */
+.lang { display: inline-flex; gap: 2px; padding: 3px; flex: none;
+        background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.lang a {
+  display: grid; place-items: center; min-width: 34px; min-height: 30px;
+  font-family: var(--mono); font-size: .64rem; font-weight: 600; letter-spacing: .08em;
+  color: var(--txt-3); text-decoration: none; border-radius: 2px;
+  transition: color .2s var(--ease), background-color .2s var(--ease);
+}
+.lang a:hover { color: var(--txt); background: var(--surface-2); }
+.lang a[aria-current="true"] { color: #fff; background-image: var(--grad-fill); }
+
+@media (max-width: 940px) {
+  .lang { width: 100%; margin-top: 1.2rem; justify-content: stretch; }
+  .lang a { flex: 1; min-height: 42px; font-size: .74rem; }
+  .nav .lang + .btn { margin-top: .6rem; }
+}
+
 .nav-toggle {
   display: none; margin-left: auto;
   width: 46px; height: 46px; padding: 0;
