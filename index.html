@@ -676,22 +676,26 @@
 
         <div class="coord">
           <span class="coord__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <dl><dt>Siège social</dt><dd>Rue des Anciens Étangs 55 bte 1<small>1190 Forest (Bruxelles) — Belgique</small></dd></dl>
+        </div>
+
+        <div class="coord">
+          <span class="coord__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></span>
           <dl><dt>Zone d’intervention</dt><dd>Belgique &amp; Europe<small>National et international selon destination</small></dd></dl>
         </div>
 
-        <!-- Carte : décommentez l’iframe une fois l’adresse connue.
-             Remplacez ADRESSE par l’adresse encodée (ex. Rue+Exemple+1,+1000+Bruxelles).
-        <div class="map">
-          <iframe
-            src="https://www.google.com/maps?q=ADRESSE&output=embed"
-            title="Localisation de HBAS TRANSPORT sur Google Maps"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        -->
+        <!-- Carte en chargement au clic : l'iframe Google n'est injectée que si
+             le visiteur la demande. Sans cela, Google déposerait des cookies dès
+             l'arrivée sur la page, ce qui imposerait une bannière de consentement. -->
         <div class="map">
           <div class="map__ph">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 4-6 2.5v13L9 17l6 2.5 6-2.5v-13L15 6.5z"/><path d="M9 4v13M15 6.5v13"/></svg>
-            <span>Carte Google Maps<br>à activer avec l’adresse</span>
+            <span>Rue des Anciens Étangs 55 bte 1<br>1190 Forest (Bruxelles)</span>
+            <button class="btn btn--ghost btn--sm" type="button" id="map-load"
+                    data-src="https://www.google.com/maps?q=Rue+des+Anciens+Etangs+55,+1190+Forest,+Belgique&amp;output=embed">
+              Afficher la carte
+            </button>
+            <small class="map__note">Le chargement de la carte transmet votre adresse IP à Google.</small>
           </div>
         </div>
 
@@ -813,6 +817,10 @@
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Rue des Anciens Étangs 55 bte 1",
+        "postalCode": "1190",
+        "addressLocality": "Bruxelles",
+        "addressRegion": "Région de Bruxelles-Capitale",
         "addressCountry": "BE"
       },
       "areaServed": [

@@ -1018,6 +1018,9 @@ a.coord:hover .coord__ico { background: var(--red); color: #fff; }
   background: repeating-linear-gradient(45deg, var(--bg-alt) 0 12px, var(--surface) 12px 24px);
 }
 .map__ph svg { width: 30px; height: 30px; color: var(--txt-3); }
+.map__ph span { font-size: .72rem; line-height: 1.7; color: var(--txt-2); text-transform: none; letter-spacing: .04em; }
+.map__ph .btn { margin-top: .3rem; }
+.map__note { font-family: var(--body); font-size: .72rem; letter-spacing: 0; text-transform: none; color: var(--txt-3); max-width: 30ch; }
 
 /* ---------------------------------------------------------------
    16. Appel à l'action final

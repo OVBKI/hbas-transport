@@ -84,6 +84,27 @@
   }
 
   /* -------------------------------------------------------------
+     1 ter. Carte : chargement au clic
+     L'iframe Google n'est injectée qu'à la demande du visiteur. Chargée
+     d'emblée, elle déposerait des cookies Google avant tout consentement
+     et imposerait une bannière.
+     ------------------------------------------------------------- */
+  var mapBtn = $('#map-load');
+  if (mapBtn) {
+    mapBtn.addEventListener('click', function () {
+      var carte = mapBtn.closest('.map');
+      var frame = document.createElement('iframe');
+      frame.src = mapBtn.getAttribute('data-src');
+      frame.title = 'Localisation de HBAS TRANSPORT';
+      frame.loading = 'lazy';
+      frame.referrerPolicy = 'no-referrer-when-downgrade';
+      frame.setAttribute('allowfullscreen', '');
+      carte.innerHTML = '';
+      carte.appendChild(frame);
+    });
+  }
+
+  /* -------------------------------------------------------------
      2. Navigation mobile
      ------------------------------------------------------------- */
   var navToggle = $('.nav-toggle');
